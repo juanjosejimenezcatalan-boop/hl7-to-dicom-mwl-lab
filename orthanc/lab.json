@@ -1,0 +1,22 @@
+{
+  "Name": "HL7-to-DICOM MWL Lab",
+  "StorageDirectory": "/var/lib/orthanc/db",
+  "RemoteAccessAllowed": true,
+  "AuthenticationEnabled": false,
+  "DicomServerEnabled": true,
+  "DicomAet": "ORTHANC_MWL",
+  "DicomPort": 4242,
+  "DicomCheckCalledAet": true,
+  "DicomCheckModalityHost": false,
+  "DicomModalities": {
+    "CT_SIM": ["CT_SIM", "mwl-client", 11112]
+  },
+  "Worklists": {
+    "Enable": true,
+    "SaveInOrthancDatabase": true,
+    "FilterIssuerAet": true,
+    "SetStudyInstanceUidIfMissing": true,
+    "DeleteWorklistsOnStableStudy": false
+  }
+}
+
