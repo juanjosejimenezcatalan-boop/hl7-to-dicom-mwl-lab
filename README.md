@@ -18,6 +18,8 @@ EHR -- ORM^O01 / MLLP --> HL7 bridge -- REST --> Orthanc Worklists plugin
 
 The [workflow diagram](docs/workflow.md) shows the accepted and rejected paths.
 See [validation evidence](docs/validation.md) for reproducible expected output.
+The [incident and recovery records](docs/incident-recovery.md) document the
+symptom, root cause, test, remediation, and verification for each failure.
 
 ## HL7-to-DICOM mapping
 
