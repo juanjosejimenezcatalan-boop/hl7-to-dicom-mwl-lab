@@ -1,0 +1,36 @@
+services:
+  orthanc-mwl:
+    image: orthancteam/orthanc:26.8.2
+    container_name: hl7-mwl-orthanc
+    ports:
+      - "127.0.0.1:8046:8042"
+      - "127.0.0.1:4246:4242"
+    volumes:
+      - ./orthanc/lab.json:/etc/orthanc/lab.json:ro
+      - ./orthanc/data:/var/lib/orthanc/db
+    healthcheck:
+      test: ["CMD", "Orthanc", "--version"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  hl7-bridge:
+    build: ./bridge
+    container_name: hl7-mwl-bridge
+    ports:
+      - "127.0.0.1:2577:2575"
+    environment:
+      ORTHANC_URL: http://orthanc-mwl:8042
+    depends_on:
+      orthanc-mwl:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+
+  mwl-client:
+    build: ./mwl-client
+    profiles: ["tools"]
+    depends_on:
+      orthanc-mwl:
+        condition: service_healthy
+
